@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<form name="frm">
+    player수 : <input type="text" name="p" id="p">
+    카드수 : <input type="text" name="c" id="c">
+    <button type="button" onClick="init()">분배</button>
+    <div id="area"></div>
+
+</form> 
+</body>
+<script>
+    function getCardNumber() {
+        return Math.floor(Math.random() * (20 - 1))
+    }
+    function init() {
+        let frm = document.frm;
+        let area = document.getElementById("area");
+        let p_num = frm.p.value;
+        let c_num = frm.c.value;
+        let card2 = new Array();
+
+        area.innerHTML = "";
+        let tot = new Array();
+        let win = 0;
+        for(i=0; i<p_num ; i++){
+            area.innerHTML += "player" + (i+1) + " => " ;
+            sum = 0;
+            card1 = new Array();
+            for(j=0; j<c_num; j++){
+                card_num = getCardNumber();
+                card1.push(card_num);
+                area.innerHTML += card_num + ",";  
+                sum += card_num;
+            }
+            card2[i] = card1;
+            area.innerHTML += " 총합계 : " + sum + "<br />"
+            tot.push(sum);
+        } 
+        win = tot[0];
+        order = 0;
+        for(i=1; i<tot.length;i++){
+            if(tot[i] > win){
+                win = tot[i];
+                order = i
+            } else {
+                if (tot[i] == win){
+                    order = i;
+                }
+            }
+        }
+        area.innerHTML += "승자는 : player" + (order+1) + "<br />";
+        area.innerHTML += "승자의 카드번호 : " + card2[order] +"<br />";
+        area.innerHTML += "승자의 총합계 : " + win ;
+    }
+</script>
+</html>

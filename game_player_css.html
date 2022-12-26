@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Players</title>
+    <style>
+        input {width: 15px; border-radius: 10px; border: 1px; font-size: 10pt; background: pink;text-align: center;}
+    </style>
+    <script>
+        function getCardNumber() {
+            return Math.floor(Math.random() * (20 - 1))
+        }
+        function init() {
+            var member = prompt("게임 참가자 수는?");
+            var card = prompt("분배할 카드 장수는?");
+            document.frm.member.value= member;
+            document.frm.card.value= card;
+            document.querySelector("#start").style.display="block";
+        }
+        //init()
+    
+        function js_num(m, c){
+            //ar frm = document.frm;   
+            var list = document.querySelector("#player"); 
+            list.innerHTML = "";
+            for (i=0; i<m; i++)  {
+             list.innerHTML += "<input type='text' name='name' value='player"+(i+1)+"' style='width:70px;background:white'> ";
+             sum = 0
+             for(j=0; j<c; j++) {
+                score = getCardNumber();
+                list.innerHTML += "<input type='text' name='card_"+i+"' value='"+score+"'> ";    
+                sum += score;
+             } 
+             list.innerHTML += "<input type='text' name='sum' value='"+sum+"' style='background:black;color:white'> <p />";  
+            }
+            list.innerHTML += "<button type='button' onClick='js_result()'>승자는</button><br />";
+        }
+        function js_result(){
+            
+            var frm = document.frm;
+            var len = frm.sum.length;
+            var result = 0;
+            var order = 0;
+            var list = document.querySelector("#player"); 
+
+            for(i=0; i<len; i++){
+                if (!result){
+                    result = Number(frm.sum[i].value);
+                    order = i;
+                } 
+                if(result < Number(frm.sum[i].value)) {
+                    result = frm.sum[i].value; //최고값 가져오기
+                    order = i;
+                } else {
+                    if(result == frm.sum[i].value) order = i; //같은 경우에는 두번째
+                }
+            }
+            var  card = "card_"+order;
+            list.innerHTML += "승자 : player"+(order+1)+"<br />";
+            list.innerHTML += "점수 : "+ result +"<br />";
+            list.innerHTML += "보유카드: " ;
+
+            for(i=0;i<document.getElementsByName(card).length;i++){
+                list.innerHTML += "<input type='text' value='"+document.getElementsByName(card)[i].value + "' /> ";
+            }
+
+        }
+    </script>
+
+</head>
+<body>
+<form name="frm">
+    <button type="button" onClick="init()">게임시작</button><p></p>
+    <div id="start" style="display:none">
+        플레이어 수 : <input type="text" name="member" value="" /> 
+        분배카드 수 : <input type="text" name="card" value="" /> 
+        <button type="button" onClick="js_num(frm.member.value, frm.card.value)">분배</button><br />
+    </div>
+    <div id="player"></div>
+
+</form>
+</body>
+</html>
+    <!--
+    [설명]
+    - 플레이어의 수를 입력 받고, 각 플레이어는 이름과 점수를 가질 수 있어야 합니다.
+    - 플레이어의 수를 입력 후 카드의 갯수를 입력 받아 각 플레이어에게 분배하며, 카드의 점수는 중복될 수 있습니다.
+    - 카드가 분배되면 카드 점수의 합으로 승자를 결정하고, 점수의 합이 같을 경우 후순위 플레이어가 이기게 됩니다.
+    - 게임 종료 시 승리한 플레이어의 이름, 카드 리스트, 점수의 합을 [출력 예]와 같이 출력하고 종료합니다.
+
+    [출력 예]
+    승자 : player1
+    점수 : 47
+    보유카드 : 19, 11, 14, 3
+
+
+    / 카드 숫자를 생성한다
+    function getCardNumber() {
+    return Math.floor(Math.random() * (20 - 1)) }
+    function init() {
+    }
+    init()
+
+-->
