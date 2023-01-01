@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Glowing Effect</title>
+</head>
+<style>
+    body{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-color: #000;
+    }
+    h1 span{
+        font-size: 10rem;
+        font-family: 'Bad Script' , cursive;
+        color: #111;
+        animation: glow 2s linear infinite;
+    }
+    @keyframes glow{
+        0%, 100%{
+            color: #fff;
+            filter: blur(2px);
+            text-shadow: 0 0 10px #00b3ff,
+            0 0 20px #00b3ff,
+            0 0 40px #00b3ff,
+            0 0 80px #00b3ff,
+            0 0 120px #00b3ff,
+            0 0 200px #00b3ff,
+            0 0 300px #00b3ff,
+            0 0 400px #00b3ff;
+        } 5%, 95%{
+            color: #111;
+            text-shadow: none;
+            filter: blur(0px);
+        }
+    }
+    h1 span:nth-child(1){
+        animation-delay: 0s;
+    }
+    h1 span:nth-child(2){
+        animation-delay: 0s;
+    }
+    h1 span:nth-child(3){
+        animation-delay: 0s;
+    }
+    h1 span:nth-child(4){
+        animation-delay: 0s;
+    }
+    h1 span:nth-child(5){
+        animation-delay: 0s;
+    }
+    h1 span:nth-child(6){
+        animation-delay: 0s;
+    }
+    h1 span:nth-child(7){
+        animation-delay: 0s;
+    }
+    h1 span:nth-child(8){
+        animation-delay: 0s;
+    }   
+</style>
+<body>
+    <h1>
+        <span>H</span>
+        <span>A</span>
+        <span>P</span>
+        <span>P</span>
+        <span>Y</span><br>
+        <span>N</span>
+        <span>E</span>
+        <span>W</span><br>
+        <span>Y</span>
+        <span>E</span>
+        <span>A</span>
+        <span>R</span>       
+    </h1>
+</body>
+</html>
